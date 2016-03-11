@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action="/users" method="post")
+    input(name="name" type="text" placeholder="Username")
+    button(type="submit") Submitgit
