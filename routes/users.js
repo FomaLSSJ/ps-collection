@@ -17,7 +17,7 @@ router.post('/', function (req, res, next) {
     if (!err) {
       return res.send('User created');
     } else {
-      return res.send('Error');
+      return res.send('Error: ' + err);
     }
   });
 });
