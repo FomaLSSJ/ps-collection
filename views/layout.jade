@@ -2,7 +2,19 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+    //JQuery Library
+    script(src='libs/jquery/dist/jquery.min.js')
+    //AngularJS
+    script(src='libs/angular/angular.min.js')
+    //AngularJS Module
+    script(src='app/app.js')
+    //Semantic-UI
+    link(rel='stylesheet', type='text/css', href='semantic/dist/semantic.min.css')
+    script(src='semantic/dist/semantic.min.js')
+    //Toastr
+    link(rel='stylesheet', type='text/css', href='libs/toastr/toastr.min.css')
+    script(src='libs/toastr/toastr.min.js')
+    //Custom Style
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
   body
     block content
