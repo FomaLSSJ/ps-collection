@@ -6,8 +6,12 @@ html
     script(src='libs/jquery/dist/jquery.min.js')
     //AngularJS
     script(src='libs/angular/angular.min.js')
-    //AngularJS Module
+    //AngularJS Application
     script(src='app/app.js')
+    script(src='app/config.js')
+    script(src='app/controllers/AuthController.js')
+    //AngularJS Modules
+    script(src='libs/angular-ui-router/release/angular-ui-router.min.js')
     //Semantic-UI
     link(rel='stylesheet', type='text/css', href='semantic/dist/semantic.min.css')
     script(src='semantic/dist/semantic.min.js')
@@ -16,5 +20,5 @@ html
     script(src='libs/toastr/toastr.min.js')
     //Custom Style
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
-  body
+  body(ng-app='app')
     block content

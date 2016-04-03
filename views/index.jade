@@ -3,12 +3,5 @@ extends layout
 block content
   include header
   
-  div.ui.main.container(ng-app="app")
-    h1= title
-    p Welcome to #{title}
-  
-    form(name='frmAuth', ng-controller="RegisterCtrl")
-      div.ui.action.input
-        input(name="name" type="text" placeholder="Username" ng-model="user.name")
-        button.ui.button(type="button" ng-click="register()") Register
-        button.ui.button(type="button") Login
+  div.ui.main.container
+    div(ui-view='main')

@@ -1,10 +1,11 @@
-div.ui.fixed.menu
+div.ui.fixed.menu.borderless
     div.ui.container
         a.header.item(href='#') Project Name
-        a.item(href='#') Home
+        a.item(ui-sref='home') Home
         div.ui.simple.dropdown.item Dropdown
             i.dropdown.icon
             div.menu
                 div.header Header
                 a.item(href='#') Item
                 div.divider
+        a.item.right(ui-sref='home.signin') Sign In

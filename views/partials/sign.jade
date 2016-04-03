@@ -1,0 +1,26 @@
+div.container.text
+    div.ui.middle.aligned.center.aligned.grid
+        div.column
+            h2.ui.teal.header
+                div.content(ng-if='self.state == "in"') Log-in to your account
+                div.content(ng-if='self.state == "up"') Create your account
+            form.ui.large.form
+                div.ui.stacked.segment
+                    div.field
+                        div.ui.left.icon.input
+                            i.user.icon
+                            input(type='text', name='username', placeholder='Username', ng-model='user.username')
+                    div.field
+                        div.ui.left.icon.input
+                            i.lock.icon
+                            input(type='password', name='password', placeholder='Password', ng-model='user.password')
+                    div.ui.fluid.large.teal.submit.button(ng-if='self.state == "in"', ng-click='signin()') Login
+                    div.ui.fluid.large.teal.submit.button(ng-if='self.state == "up"', ng-click='signup()') Register
+                div.ui.error.message
+            div.ui.message(ng-if='self.state == "in"')
+                | New to us? 
+                a(ui-sref='home.signup') Sign up
+            div.ui.message(ng-if='self.state == "up"')
+                | Already register? 
+                a(ui-sref='home.signin') Sign in
+      
