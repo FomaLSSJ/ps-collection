@@ -5,6 +5,13 @@ var express = require('express'),
 
 var userModel = require('../model/user').userModel;
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
 passport.use(new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
     userModel.findOne({
@@ -28,6 +35,16 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/find/:id', function(req, res, next) {
+    userModel.findById(req.params.id, {password: 0, salt: 0}, function(err, user) {
+      if (err) {
+        return res.send({status: false, response: {message: 'User not found', name: 'Model'}});
+      } else if (!err) {
+        return res.send({status: true, user: user});
+      }
+    });
+});
+
 router.post('/create', function (req, res, next) {
   var user = new userModel({
     username: req.body.username
@@ -38,7 +55,7 @@ router.post('/create', function (req, res, next) {
     if (!err) {
       return res.send({'status':true,'response': {message: 'user created', name:'Model'}});
     } else if (err.name == 'ValidationError') {
-        return res.send({status: false, 'response': {message: 'Validation error', name:'Valid'}});
+        return res.send({status: false, response: {message: 'Validation error', name:'Valid'}});
     } else if (err.code == 11000) {
         return res.send({status: false, response: {message: 'Username exist', name:'Model'}});
     } else {
@@ -53,15 +70,14 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/success', function(req, res, next) {
-    return res.send({status: true, response:{ message: 'Successfully authenticated'}});
+    return res.send({status: true, response:{ message: 'Successfully authenticated'}, user: {id: req.user._id, username: req.user.username}});
 });
 
 router.get('/failure', function(req, res, next) {
     return res.send({status: false, response:{ message: 'Failed to authenticate'}});
 });
 
-router.get('/logout', function(req, res) {
-    req.session.destroy();
+router.post('/logout', function(req, res) {
     return res.send({status: true, response: {message: 'You logout'}});
 });
 

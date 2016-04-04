@@ -1,16 +1,24 @@
-angular.module('app').controller('AuthCtrl', function($scope, $state, $http) {
+angular.module('app').controller('AuthCtrl', function($scope, $state, $http, $cookieStore) {
+    var cookie = $cookieStore.get('_user_data');
+    if (cookie) {
+        $http.get('/users/find/' + cookie.id)
+        .then(function(res) {
+            if (res.data.status) {
+                $state.go('home');
+            }
+        });
+    }
+    
     $scope.self = {
         state: $state.current.data.state
     }
     
-    $scope.user = {};
-    
     $scope.signup = function() {
         $http({
-            method:'POST',
-            url:'/users/create',
+            method: 'POST',
+            url: '/users/create',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data:$.param({username: $scope.user.username, password: $scope.user.password})
+            data: $.param({username: $scope.user.username, password: $scope.user.password})
         })
         .then(
             function(res) {
@@ -31,9 +39,9 @@ angular.module('app').controller('AuthCtrl', function($scope, $state, $http) {
     
     $scope.signin = function() {
         $http({
-            method:'POST',
-            url:'/users/login',
-            params:$scope.user
+            method: 'POST',
+            url: '/users/login',
+            params: $scope.user
         })
         .then(
             function(res) {
@@ -41,9 +49,12 @@ angular.module('app').controller('AuthCtrl', function($scope, $state, $http) {
                 toastr.options = {'closeButton': true, 'timeOut': 0};
                 
                 if (res.data.status) {
-                    toastr.success(r.message);
+                    $cookieStore.put('_user_data', {id: res.data.user.id, username: res.data.user.username});
+                    $scope.$parent.user = $cookieStore.get('_user_data');
+                    $state.go('home');
+                    toastr.success(r.message, 'Success');
                 } else {
-                    toastr.error(r.message);
+                    toastr.error(r.message, 'Error');
                 }
             },
             function(res) {

@@ -8,4 +8,14 @@ div.ui.fixed.menu.borderless
                 div.header Header
                 a.item(href='#') Item
                 div.divider
-        a.item.right(ui-sref='home.signin') Sign In
+        a.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
+        a.item.right(ui-popup, ng-if='user.id') Profile
+        div.ui.custom.popup.bottom.left.transition.hidden
+            div.ui.column.divided.center.aligned.grid
+                div.column
+                    h4 Profile
+                    p Place your info
+                    div
+                        a(href='#') Open profile
+                    div
+                        a(href='#', ng-click='logout($event)') Logout

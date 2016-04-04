@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "^1.5.3",
     "angular-ui-router": "ui-router#^0.2.18",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "angular-cookies": "^1.5.3"
   }
 }
