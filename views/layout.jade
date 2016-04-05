@@ -1,27 +1,31 @@
 doctype html
 html
   head
-    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    title PlayStation Collection
     //JQuery Library
-    script(type="text/javascript", src='libs/jquery/dist/jquery.min.js')
+    script(type='text/javascript', src='libs/jquery/dist/jquery.min.js')
     //AngularJS
-    script(type="text/javascript", src='libs/angular/angular.min.js')
+    script(type='text/javascript', src='libs/angular/angular.min.js')
     //AngularJS Application
-    script(type="text/javascript", src='app/app.js')
-    script(type="text/javascript", src='app/config.js')
-    script(type="text/javascript", src='app/controllers/AppController.js')
-    script(type="text/javascript", src='app/controllers/AuthController.js')
-    script(type="text/javascript", src='app/directives/SemanticDirective.js')
+    script(type='text/javascript', src='app/app.js')
+    script(type='text/javascript', src='app/config.js')
+    script(type='text/javascript', src='app/controllers/AppController.js')
+    script(type='text/javascript', src='app/controllers/AuthController.js')
+    script(type='text/javascript', src='app/directives/SemanticDirective.js')
+    script(type='text/javascript', src='app/directives/BreadcrumbDirective.js')
+    script(type='text/javascript', src='app/services/AuthService.js')
     //AngularJS Modules
-    script(type="text/javascript", src='libs/angular-ui-router/release/angular-ui-router.min.js')
-    script(type="text/javascript", src='libs/angular-cookies/angular-cookies.min.js')
+    script(type='text/javascript', src='libs/angular-ui-router/release/angular-ui-router.min.js')
+    script(type='text/javascript', src='libs/angular-cookies/angular-cookies.min.js')
     //Semantic-UI
     link(rel='stylesheet', type='text/css', href='semantic/dist/semantic.min.css')
-    script(type="text/javascript", src='semantic/dist/semantic.min.js')
+    script(type='text/javascript', src='semantic/dist/semantic.min.js')
     //script(src='javascripts/exec.js')
     //Toastr
     link(rel='stylesheet', type='text/css', href='libs/toastr/toastr.min.css')
-    script(type="text/javascript", src='libs/toastr/toastr.min.js')
+    script(type='text/javascript', src='libs/toastr/toastr.min.js')
     //Custom Style
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
   body(ng-app='app', ng-controller='AppCtrl')

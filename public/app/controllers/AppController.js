@@ -1,7 +1,13 @@
-angular.module('app').controller('AppCtrl', function($scope, $http, $cookieStore) {
+'use strict';
+
+angular.module('app').controller('AppCtrl', AppCtrl);
+
+AppCtrl.$inject = ['$scope', '$http', '$cookies', '$state'];
+
+function AppCtrl($scope, $http, $cookies, $state) {
     $scope.user = {};
     
-    var userData = $cookieStore.get('_user_data');
+    var userData = $cookies.getObject('_user_data');
     if (userData) {
         $scope.user = userData;
     }
@@ -15,10 +21,10 @@ angular.module('app').controller('AppCtrl', function($scope, $http, $cookieStore
         })
         .then(function(res) {
             if (res.data.status) {
-                $cookieStore.remove('_user_data');
+                $cookies.remove('_user_data');
                 $scope.user = {};
                 toastr.success(res.data.response.message, 'Success');
             }
         })
     }
-});
+};

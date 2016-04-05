@@ -1,12 +1,12 @@
-angular.module('app').controller('AuthCtrl', function($scope, $state, $http, $cookieStore) {
-    var cookie = $cookieStore.get('_user_data');
-    if (cookie) {
-        $http.get('/users/find/' + cookie.id)
-        .then(function(res) {
-            if (res.data.status) {
-                $state.go('home');
-            }
-        });
+'use strict';
+
+angular.module('app').controller('AuthCtrl', AuthCtrl);
+
+AuthCtrl.$inject = ['$scope', '$state', '$http', '$cookies', 'login'];
+
+function AuthCtrl($scope, $state, $http, $cookies, login) {
+    if (login) {
+        $state.go('home');
     }
     
     $scope.self = {
@@ -49,8 +49,11 @@ angular.module('app').controller('AuthCtrl', function($scope, $state, $http, $co
                 toastr.options = {'closeButton': true, 'timeOut': 0};
                 
                 if (res.data.status) {
-                    $cookieStore.put('_user_data', {id: res.data.user.id, username: res.data.user.username});
-                    $scope.$parent.user = $cookieStore.get('_user_data');
+                    var expireDate = new Date();
+                    expireDate.setDate(expireDate.getDate() + 1);
+                    
+                    $cookies.putObject('_user_data', {id: res.data.user.id, username: res.data.user.username}, {expires: expireDate});
+                    $scope.$parent.user = $cookies.getObject('_user_data');
                     $state.go('home');
                     toastr.success(r.message, 'Success');
                 } else {
@@ -62,4 +65,4 @@ angular.module('app').controller('AuthCtrl', function($scope, $state, $http, $co
             }
         )
     }
-});
+};

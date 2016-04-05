@@ -70,15 +70,22 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/success', function(req, res, next) {
-    return res.send({status: true, response:{ message: 'Successfully authenticated'}, user: {id: req.user._id, username: req.user.username}});
+    return res.send({status: true, response:{
+      message: 'Successfully authenticated'},
+      user: {id: req.user._id, username: req.user.username}
+    });
 });
 
 router.get('/failure', function(req, res, next) {
     return res.send({status: false, response:{ message: 'Failed to authenticate'}});
 });
 
-router.post('/logout', function(req, res) {
+router.post('/logout', function(req, res, next) {
     return res.send({status: true, response: {message: 'You logout'}});
+});
+
+router.post('/edit', function(req, res, next) {
+    return null;
 });
 
 module.exports = router;

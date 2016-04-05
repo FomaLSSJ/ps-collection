@@ -1,4 +1,10 @@
-angular.module('app').config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+'use strict';
+
+angular.module('app').config(Config);
+
+Config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
+
+function Config($stateProvider, $locationProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('home', {
@@ -19,6 +25,11 @@ angular.module('app').config(function($stateProvider, $locationProvider, $urlRou
                     templateUrl:'/partials/sign',
                     controller:'AuthCtrl'
                 }
+            },
+            resolve:{
+                login: ['AuthService', function(AuthService) {
+                    return AuthService.getAuth();
+                }]
             }
         })
         .state('home.signup', {
@@ -30,8 +41,14 @@ angular.module('app').config(function($stateProvider, $locationProvider, $urlRou
                     templateUrl:'/partials/sign',
                     controller:'AuthCtrl'
                 }
+            },
+            resolve:{
+                login: ['AuthService', function(AuthService) {
+                    return AuthService.getAuth();
+                }]
             }
         })
     
     //$locationProvider.html5Mode({enabled:true, requireBase:false});
-});
+    $locationProvider.hashPrefix('!')
+};

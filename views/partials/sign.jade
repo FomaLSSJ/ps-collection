@@ -1,7 +1,7 @@
 div.container.text
     div.ui.middle.aligned.center.aligned.grid
         div.column
-            h2.ui.teal.header
+            h2.ui.blue.header
                 div.content(ng-if='self.state == "in"') Log-in to your account
                 div.content(ng-if='self.state == "up"') Create your account
             form.ui.large.form
@@ -14,8 +14,8 @@ div.container.text
                         div.ui.left.icon.input
                             i.lock.icon
                             input(type='password', name='password', placeholder='Password', ng-model='user.password')
-                    div.ui.fluid.large.teal.submit.button(ng-if='self.state == "in"', ng-click='signin()') Login
-                    div.ui.fluid.large.teal.submit.button(ng-if='self.state == "up"', ng-click='signup()') Register
+                    div.ui.fluid.blue.submit.button(ng-if='self.state == "in"', ng-click='signin()') Login
+                    div.ui.fluid.blue.submit.button(ng-if='self.state == "up"', ng-click='signup()') Register
                 div.ui.error.message
             div.ui.message(ng-if='self.state == "in"')
                 | New to us? 

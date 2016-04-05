@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/partials/:id', function(req, res, next) {
-    res.render('partials/' + req.params.id);
+  res.render('partials/' + req.params.id);
 });
 
 module.exports = router;
