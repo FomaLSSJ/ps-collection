@@ -65,6 +65,27 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('home.profile', {
+            id: 4,
+            url:'^/profile',
+            views:{
+                'main@':{
+                    templateUrl:'/partials/profile',
+                    controller:'ProfileCtrl'
+                }
+            },
+            data:{
+                breadcrumb: [
+                    {name: 'Home', divider: true, url: 'home'},
+                    {name: 'Profile', divider: false, url: false}
+                ]
+            },
+            resolve:{
+                login: ['AuthService', function(AuthService) {
+                    return AuthService.getAuth();
+                }]
+            }
+        })
     
     //$locationProvider.html5Mode({enabled:true, requireBase:false});
     $locationProvider.hashPrefix('!')

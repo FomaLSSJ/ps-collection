@@ -4,12 +4,16 @@ div.ui.fixed.menu.borderless
             //- img.logo(src="assets/images/psc-logo.jpg")
             | PS-Collection
         a.item(ui-sref='home') Home
-        div.ui.simple.dropdown.item Dropdown
+        div.ui.simple.dropdown.item Menu
             i.dropdown.icon
             div.menu
-                div.header Header
-                a.item(href='#') Item
+                div.header Users
+                a.item(ui-sref='home.profile') My profile
+                a.item(href='#') Other users
                 div.divider
+                div.header Games
+                a.item(href='#') PS3
+                a.item(href='#') PS4
         a.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
         a.item.right(ui-popup, ng-if='user.id') Profile
         div.ui.custom.popup.bottom.left.transition.hidden

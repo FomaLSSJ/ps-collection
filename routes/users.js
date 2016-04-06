@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/find/:id', function(req, res, next) {
+router.get('/get/:id', function(req, res, next) {
     userModel.findById(req.params.id, {password: 0, salt: 0}, function(err, user) {
       if (err) {
         return res.send({status: false, response: {message: 'User not found', name: 'Model'}});
