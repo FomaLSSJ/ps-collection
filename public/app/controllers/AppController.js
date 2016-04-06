@@ -6,6 +6,7 @@ AppCtrl.$inject = ['$scope', '$http', '$cookies', '$state'];
 
 function AppCtrl($scope, $http, $cookies, $state) {
     $scope.user = {};
+    $scope.breadcrumb = [];
     
     var userData = $cookies.getObject('_user_data');
     if (userData) {

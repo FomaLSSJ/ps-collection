@@ -14,17 +14,28 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
                 'main@':{
                     templateUrl:'/partials/main'
                 }
+            },
+            data: {
+                breadcrumb: [
+                    {name: 'Home', divider: false, url: false}
+                ]
             }
         })
         .state('home.signin', {
             id: 2,
             url:'^/signin',
-            data: {state:'in'},
             views:{
                 'main@':{
                     templateUrl:'/partials/sign',
                     controller:'AuthCtrl'
                 }
+            },
+            data: {
+                state:'in',
+                breadcrumb: [
+                    {name: 'Home', divider: true, url: 'home'},
+                    {name: 'Sign In', divider: false, url: false}
+                ]
             },
             resolve:{
                 login: ['AuthService', function(AuthService) {
@@ -35,12 +46,18 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
         .state('home.signup', {
             id: 3,
             url:'^/signup',
-            data: {state:'up'},
             views:{
                 'main@':{
                     templateUrl:'/partials/sign',
                     controller:'AuthCtrl'
                 }
+            },
+            data: {
+                state:'up',
+                breadcrumb: [
+                    {name: 'Home', divider: true, url: 'home'},
+                    {name: 'Sign Up', divider: false, url: false}
+                ]
             },
             resolve:{
                 login: ['AuthService', function(AuthService) {

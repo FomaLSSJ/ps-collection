@@ -2,38 +2,23 @@
 
 angular.module('app').directive('breadcrumb', breadcrumb);
 
-function breadcrumb() {
+breadcrumb.$inject = ['$rootScope'];
+
+function breadcrumb($rootScope) {
     return {
         restrict: 'E',
         replace: true,
-        template: '<div class="ui small breadcrumb">Breadcrumb</div>',
-        link: function($rootScope, $scope, element, attrs) {
-            function capFirst(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-            
+        scope: true,
+        template: '<div class="ui small breadcrumb" ng-repeat="item in obj">' +
+                    '<a ng-if="item.url" ui-sref="{{item.url}}">{{ item.name }}</a>' +
+                    '<div ng-if="!item.url" class="active section">{{ item.name }}</div>' +
+                    '<i ng-if="item.divider" class="right angle icon divider"></i>' +
+                    '</div>',
+        link: function(scope, element, attrs) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
                 console.log(toState);
-                
-                var breadcrumb = toState.name.split('.');
-                var object = [];
-                var prevUrl = '';
-                for (var i, i = 0; i < breadcrumb.length; i++) {
-                    var bc = breadcrumb.length - 1;
-                    if (i === bc) {
-                        prevUrl = prevUrl + breadcrumb[i];
-                        object.push({name: capFirst(breadcrumb[i]), devider: false, url: prevUrl})
-                    } else {
-                        if (i === 0) {
-                            prevUrl = breadcrumb[i];
-                        } else {
-                            prevUrl = prevUrl + '.' + breadcrumb[i];
-                        }
-                        object.push({name: capFirst(breadcrumb[i]), devider: true, url: prevUrl})
-                    }
-                }
-                console.log(object);
-            })
+                scope.obj = toState.data.breadcrumb;
+            });
         }
     }
 };
