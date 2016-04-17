@@ -1,7 +1,7 @@
 {
   "port": 3000,
   "mongoose": {
-    "uri": "mongodb://admin:passwd@ds013589.mlab.com:13589/ps-collection"
+    "uri": "mongodb://admin:passwd@ds011830.mlab.com:11830/ps-collection"
   },
   "session" : {
     "secret" : "La-Li-Lu-Le-Lo",

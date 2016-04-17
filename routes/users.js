@@ -45,6 +45,16 @@ router.get('/get/:id', function(req, res, next) {
     });
 });
 
+router.get('/all/:limit', function(req, res, next) {
+    userModel.find({}, {password: 0, salt: 0, email: 0}, {limit: req.params.limit}, function(err, users) {
+      if (err) {
+        return res.send({status: false, response: {message: 'User not found', name: 'Model'}});
+      } else if (!err) {
+        return res.send({status: true, users: users});
+      }
+    });
+});
+
 router.post('/create', function (req, res, next) {
   var user = new userModel({
     username: req.body.username
@@ -53,11 +63,11 @@ router.post('/create', function (req, res, next) {
 
   user.save(function(err) {
     if (!err) {
-      return res.send({'status':true,'response': {message: 'user created', name:'Model'}});
+      return res.send({'status':true,'response': {message: 'User created', name:'Model'}});
     } else if (err.name == 'ValidationError') {
         return res.send({status: false, response: {message: 'Validation error', name:'Valid'}});
     } else if (err.code == 11000) {
-        return res.send({status: false, response: {message: 'Username exist', name:'Model'}});
+        return res.send({status: false, response: {message: 'Username exist', name:'Model', err: err}});
     } else {
         return res.send({status: false, response: {message:'Failed', name: 'Error'}});
     }
@@ -72,7 +82,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/success', function(req, res, next) {
     return res.send({status: true, response:{
       message: 'Successfully authenticated'},
-      user: {id: req.user._id, username: req.user.username}
+      user: {id: req.user.id, username: req.user.username}
     });
 });
 

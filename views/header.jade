@@ -4,14 +4,16 @@ div.ui.fixed.menu.borderless
             //- img.logo(src="assets/images/psc-logo.jpg")
             | PS-Collection
         a.item(ui-sref='home') Home
-        div.ui.simple.dropdown.item Menu
+        div.ui.simple.dropdown.item Comunity
             i.dropdown.icon
             div.menu
-                div.header Users
-                a.item(ui-sref='home.profile') My profile
-                a.item(href='#') Other users
-                div.divider
-                div.header Games
+                div.header Profiles
+                a.item(ui-sref='home.profile({ id:user.id })', ng-if="user.id") My profile
+                a.item(ui-sref='home.users') Other users
+        div.ui.simple.dropdown.item Games
+            i.dropdown.icon
+            div.menu
+                div.header Consoles
                 a.item(href='#') PS3
                 a.item(href='#') PS4
         a.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
@@ -22,6 +24,4 @@ div.ui.fixed.menu.borderless
                     h4 Profile
                     p Place your info
                     div
-                        a(href='#') Open profile
-                    div
-                        a(href='#', ng-click='logout($event)') Logout
+                        a(ui-sref='home.profile({ id:user.id })') Open profile

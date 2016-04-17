@@ -1,13 +1,59 @@
 h2.ui.blue.horizontal.header.divider Profile
-div.ui.card
-    div.image
-        img
-    div.content
-        a.header {{ user.username }}
-        div.meta
-            span.date Aug 2016
-        div.description This is testing profile
-    div.extra.content
-        a
-            i.game.icon
-            | 8 Games
+div.ui.icon.buttons(ng-if='profile.self')
+    button.ui.button(ng-click='')
+        i.edit.icon
+        | Edit
+    button.ui.button(ng-click='logout($event)')
+        i.sign.out.icon
+        | Logout
+
+div.ui.grid.segment
+    div.three.wide.column
+        gravatar-img(email='{{ profile.email }}')
+    div.twelve.wide.column
+        h3
+            a {{ profile.username }}
+        //h4 Join Us
+        //span.date Aug 2016
+        h4 Info:
+        span {{ profile.info }}
+
+h2.ui.blue.horizontal.header.divider Games
+table.ui.celled.table
+    thead
+        tr
+            th Title
+            th Platform
+            th Type
+            th Disc
+            th Manual
+            th Box
+            th Country
+            th Code
+    tbody
+        tr
+            td DARK SOULS - Prepare to Die Edition
+            td PS3
+            td Phisical
+            td
+                i.icon.green.checkmark Yes
+            td
+                i.icon.green.checkmark Yes
+            td
+                i.icon.green.checkmark Yes
+            td EU
+            td BLES-01765
+        tr
+            td Salt and Sanctuary
+            td PS4
+            td Digital
+            td
+                i.icon.red.remove No
+            td
+                i.icon.red.remove No
+            td
+                i.icon.red.remove No
+            td EU
+            td Unknown
+            
+    

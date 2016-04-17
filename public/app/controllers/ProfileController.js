@@ -1,19 +1,46 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('app').controller('ProfileCtrl', ProfileCtrl);
-
-ProfileCtrl.$inject = ['$scope', '$http', '$cookies', '$state', 'login'];
-
-function ProfileCtrl($scope, $http, $cookies, $state, login) {
-    if (!login) {
-        $state.go('home');
-    }
+    angular.module('app').controller('ProfileCtrl', ProfileCtrl);
     
-    $http({
-        method: 'GET',
-        url: '/users/get/' + $scope.$parent.user.id
-    }).then(function(res) {
-        $scope.$parent.user = res.data.user;
-    });
+    ProfileCtrl.$inject = ['$rootScope', '$scope', '$http', '$cookies', '$state', '$stateParams', 'profile', 'HelperService'];
     
-};
+    function ProfileCtrl($rootScope, $scope, $http, $cookies, $state, $stateParams, profile, HelperService) {
+        if (!profile) {
+            $state.go('home');
+        }
+        
+        $scope.$parent.profile = profile.user;
+        
+        $scope.logout = function(e) {
+            e.preventDefault();
+            
+            $http({
+                method: 'POST',
+                url: '/users/logout'
+            })
+            .then(function(res) {
+                if (res.data.status) {
+                    $cookies.remove('_user_data');
+                    $scope.$parent.user = {};
+                    toastr.success(res.data.response.message, 'Success');
+                    $state.go('home.signin');
+                }
+            })
+        }
+        
+        $scope.$watch('profile.id' , function() {
+            if (!$scope.profile || !$cookies.getObject('_user_data')) {
+                $scope.profile.self = false;
+                return;
+            }
+            
+            if ($scope.profile.id === $cookies.getObject('_user_data').id) {
+                $scope.profile.self = true;
+            } else {
+                $scope.profile.self = false;
+            }
+            return;
+        });
+    };
+})();

@@ -1,0 +1,23 @@
+h2.ui.blue.horizontal.header.divider Users
+table.ui.celled.table
+    thead
+        tr
+            th Name
+            th Role
+            th PSN ID
+            th Info
+    tbody
+        tr(ng-repeat='user in users')
+            td
+                a(ui-sref='home.profile({ id:user.id })')
+                    span(ng-bind='user.username')
+            td(ng-bind='user.role')
+            td(ng-if='user.psnid')
+                a(ng-href='//my.playstation.com/{{ ::user.psnid }}', target='_blank')
+                    span(ng-bind='user.psnid')
+            td(ng-if='!user.psnid')
+                span None
+            td(ng-if='user.info')
+                span(ng-bind='user.info')
+            td(ng-if='!user.info')
+                span None

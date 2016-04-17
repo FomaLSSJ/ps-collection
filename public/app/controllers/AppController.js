@@ -1,31 +1,17 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('app').controller('AppCtrl', AppCtrl);
-
-AppCtrl.$inject = ['$scope', '$http', '$cookies', '$state'];
-
-function AppCtrl($scope, $http, $cookies, $state) {
-    $scope.user = {};
-    $scope.breadcrumb = [];
+    angular.module('app').controller('AppCtrl', AppCtrl);
     
-    var userData = $cookies.getObject('_user_data');
-    if (userData) {
-        $scope.user = userData;
-    }
+    AppCtrl.$inject = ['$scope', '$http', '$cookies'];
     
-    $scope.logout = function(e) {
-        e.preventDefault();
+    function AppCtrl($scope, $http, $cookies) {
+        $scope.user = {};
+        $scope.profile = {};
         
-        $http({
-            method: 'POST',
-            url: '/users/logout'
-        })
-        .then(function(res) {
-            if (res.data.status) {
-                $cookies.remove('_user_data');
-                $scope.user = {};
-                toastr.success(res.data.response.message, 'Success');
-            }
-        })
-    }
-};
+        var userData = $cookies.getObject('_user_data');
+        if (userData) {
+            $scope.user = userData;
+        }
+    };
+})();

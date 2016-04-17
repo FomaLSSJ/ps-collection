@@ -4,7 +4,7 @@ div.container.text
             h2.ui.blue.header
                 div.content(ng-if='self.state == "in"') Log-in to your account
                 div.content(ng-if='self.state == "up"') Create your account
-            form.ui.large.form
+            form.ui.large.form(ng-submit='(self.state == "in")?signin():signup()', ng-class="(self.loading)?'loading':''")
                 div.ui.stacked.segment
                     div.field
                         div.ui.left.icon.input
@@ -16,6 +16,7 @@ div.container.text
                             input(type='password', name='password', placeholder='Password', ng-model='user.password')
                     div.ui.fluid.blue.submit.button(ng-if='self.state == "in"', ng-click='signin()') Login
                     div.ui.fluid.blue.submit.button(ng-if='self.state == "up"', ng-click='signup()') Register
+                    input.hidden(type='submit')
                 div.ui.error.message
             div.ui.message(ng-if='self.state == "in"')
                 | New to us? 
