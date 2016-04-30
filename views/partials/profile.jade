@@ -1,22 +1,56 @@
 h2.ui.blue.horizontal.header.divider Profile
 div.ui.icon.buttons(ng-if='profile.self')
-    button.ui.button(ng-click='')
+    button.ui.button(ui-sref='home.profile.edit', ng-if='self.state == "show"')
         i.edit.icon
         | Edit
-    button.ui.button(ng-click='logout($event)')
+    button.ui.button(ng-click='logout($event)', ng-if='self.state == "show"')
         i.sign.out.icon
         | Logout
+    button.ui.button(ui-sref='home.profile({ id:profile.id })', ng-if='self.state == "edit"')
+        i.remove.icon
+        | Cancel
+    button.ui.button(ng-click='saveProfile()', ng-if='self.state == "edit"')
+        i.checkmark.icon
+        | Save
+
+div.ui.icon.buttons(ng-if='!profile.self && (user.role == "admin" || user.role == "moder")')
+    button.ui.button(ui-sref='home.profile.edit', ng-if='self.state == "show"')
+        i.edit.icon
+        | Edit user
+    button.ui.button(ui-sref='home.profile({ id:profile.id })', ng-if='self.state == "edit"')
+        i.remove.icon
+        | Cancel
+    button.ui.button(ng-click='saveProfile()', ng-if='self.state == "edit"')
+        i.checkmark.icon
+        | Save
 
 div.ui.grid.segment
-    div.three.wide.column
+    div.ui.three.wide.column
         gravatar-img(email='{{ profile.email }}')
-    div.twelve.wide.column
-        h3
+    div.ui.thirteen.wide.column
+        h2
             a {{ profile.username }}
         //h4 Join Us
         //span.date Aug 2016
-        h4 Info:
-        span {{ profile.info }}
+        div.ui.divided.selection.list
+            div.item
+                div.ui.horizontal.label Role
+                span {{ profile.role }}
+            div.item(ng-if='self.state == "show"')
+                div.ui.horizontal.label PSN ID
+                a(ng-href='//my.playstation.com/{{ ::profile.psnid }}', target='_blank')
+                    span(ng-bind='profile.psnid')
+            div.item(ng-if='self.state == "show"')
+                div.ui.horizontal.label Info
+                span {{ profile.info }}
+            
+            div.ui.mini.fluid.labeled.input.small-padding(ng-if='self.state == "edit"')
+                div.ui.label PSN ID
+                input(type='text', placeholder='PSN ID', ng-model='profile.psnid')
+            div.ui.divider.small-invisible
+            div.ui.mini.fluid.labeled.input.small-padding(ng-if='self.state == "edit"')
+                div.ui.label Info
+                input(type='text', placeholder='Info', ng-model='profile.info')
 
 h2.ui.blue.horizontal.header.divider Games
 table.ui.celled.table

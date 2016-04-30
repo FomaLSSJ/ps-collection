@@ -74,6 +74,16 @@ router.post('/create', function (req, res, next) {
   });
 });
 
+router.post('/edit/:id', function(req, res, next) {
+    userModel.findByIdAndUpdate(req.params.id, {psnid: req.body.psnid, info: req.body.info}, function(err) {
+      if (!err) {
+        return res.send({status: true, response: {message: 'Profile update', name: 'Model'}});
+      } else {
+        return res.send({status: false, response: {message:'Profile not update', name: 'Error'}});
+      }
+    });
+});
+
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/users/success',
   failureRedirect: '/users/failure'
@@ -82,7 +92,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/success', function(req, res, next) {
     return res.send({status: true, response:{
       message: 'Successfully authenticated'},
-      user: {id: req.user.id, username: req.user.username}
+      user: {id: req.user.id, username: req.user.username, role: req.user.role}
     });
 });
 

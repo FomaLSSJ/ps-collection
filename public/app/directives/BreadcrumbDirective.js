@@ -9,9 +9,10 @@
         return {
             restrict: 'E',
             replace: true,
-            scope: false,
+            scope: true,
             template: '<div class="ui small breadcrumb" ng-repeat="item in obj">' +
-                        '<a ng-if="item.url" ui-sref="{{item.url}}">{{ item.name }}</a>' +
+                        '<a ng-if="item.url && !item.user" ui-sref="{{item.url}}">{{ item.name }}</a>' +
+                        '<a ng-if="item.url && item.user" ui-sref="{{item.url}}">{{ profile.username }}</a>' +
                         '<div ng-if="!item.url && !item.user" class="active section">{{ item.name }}</div>' +
                         '<div ng-if="!item.url && item.user" class="active section">{{ profile.username }}</div>' +
                         '<i ng-if="item.divider" class="right angle icon divider"></i>' +

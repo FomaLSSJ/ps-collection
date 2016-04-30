@@ -26,11 +26,6 @@
             .then(
                 function(res) {
                     var r = res.data.response;
-                    toastr.options = {
-                        'closeButton': true,
-                        'timeOut': 5000,
-                        'progressBar': true
-                    };
                     
                     if (res.data.status) {
                         toastr.success(r.message);
@@ -57,7 +52,6 @@
             .then(
                 function(res) {
                     var r = res.data.response;
-                    toastr.options = {'closeButton': true, 'timeOut': 0};
                     
                     if (res.data.status) {
                         var expireDate = new Date();

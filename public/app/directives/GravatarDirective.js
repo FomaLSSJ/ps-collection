@@ -10,7 +10,7 @@
             restrict: 'AE',
             replace: true,
             required: 'email',
-            template: '<img class="ui image" ng-src="{{ url }}"/>',
+            template: '<img class="ui image centered" ng-src="{{ url }}"/>',
             link: function (scope, element, attrs) {
                 scope.url = 'assets/images/image.png';
                 

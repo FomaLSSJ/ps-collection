@@ -1,6 +1,12 @@
 (function() {
     'use strict';
-
+    
+    toastr.options = {
+        'closeButton': true,
+        'timeOut': 5000,
+        'progressBar': true
+    };
+    
     angular.module('app').config(Config);
     
     Config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
@@ -76,6 +82,7 @@
                     }
                 },
                 data:{
+                    state:'show',
                     breadcrumb: [
                         {name: 'Home', divider: true, url: 'home'},
                         {name: 'Users', divider: true, url: 'home.users'},
@@ -88,8 +95,32 @@
                     }]
                 }
             })
-            .state('home.users', {
+            .state('home.profile.edit', {
                 id: 5,
+                url:'^/profile/:id/edit',
+                views:{
+                    'main@':{
+                        templateUrl:'/partials/profile',
+                        controller:'ProfileCtrl'
+                    }
+                },
+                data:{
+                    state:'edit',
+                    breadcrumb: [
+                        {name: 'Home', divider: true, url: 'home'},
+                        {name: 'Users', divider: true, url: 'home.users'},
+                        {name: '{{ profile.username }}', divider: true, url: 'home.profile({ id:profile.id })', user: true},
+                        {name: 'Edit', divider: false, url: false}
+                    ]
+                },
+                resolve:{
+                    profile: ['AuthService', '$stateParams', function(AuthService, $stateParams) {
+                        return AuthService.getAuth($stateParams.id);
+                    }]
+                }
+            })
+            .state('home.users', {
+                id: 6,
                 url:'^/users',
                 views:{
                     'main@':{
