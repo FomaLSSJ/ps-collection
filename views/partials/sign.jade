@@ -20,8 +20,8 @@ div.container.text
                 div.ui.error.message
             div.ui.message(ng-if='self.state == "in"')
                 | New to us? 
-                a(ui-sref='home.signup') Sign up
+                a#signup(ui-sref='home.signup') Sign up
             div.ui.message(ng-if='self.state == "up"')
                 | Already register? 
-                a(ui-sref='home.signin') Sign in
+                a#signin(ui-sref='home.signin') Sign in
       

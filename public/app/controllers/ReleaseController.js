@@ -32,7 +32,6 @@
             method: 'GET',
             url: '/releases/all/' + $state.params.platform + '/10'
         }).then(function(res) {
-            console.log(res.data);
             vm.releases = res.data.releases;
         });
     }

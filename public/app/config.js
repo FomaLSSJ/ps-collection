@@ -188,9 +188,9 @@
                         {name: 'Releases', divider: false, url: false},
                     ]
                 }
-            })
+            });
         
         //$locationProvider.html5Mode({enabled:true, requireBase:false});
-        $locationProvider.hashPrefix('!')
-    };
+        $locationProvider.hashPrefix('!');
+    }
 })();

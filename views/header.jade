@@ -3,28 +3,28 @@ div.ui.fixed.menu.borderless
         a.header.item(href='#')
             //- img.logo(src="assets/images/psc-logo.jpg")
             | PS-Collection
-        a#menu-item.item(ui-sref='home') Home
-        div#menu-item.ui.simple.dropdown.item Comunity
+        a#menu-item.item(ui-sref='home', menu="home") Home
+        div#menu-item.ui.simple.dropdown.item(menu="community") Community
             i.dropdown.icon
             div.menu
                 div.header Profiles
                 a#sub-item.item(ui-sref='home.profile({ id:user.id })', ng-if="user.id") My profile
                 a#sub-item.item(ui-sref='home.users') Other users
-        div#menu-item.ui.simple.dropdown.item Games
+        div#menu-item.ui.simple.dropdown.item(menu="games") Games
             i.dropdown.icon
             div.menu
                 div.header Consoles
                 a#sub-item.item(ui-sref='home.releases({ platform: "ps3" })') PS3
                 a#sub-item.item(ui-sref='home.releases({ platform: "ps4" })') PS4
-        diva#menu-item.ui.simple.dropdown.item Add
+        div#menu-item.ui.simple.dropdown.item(menu="add", ng-if='user.role == "admin" || user.role == "moder"') Add
             i.dropdown.icon
             div.menu
                 div.header Category
                 a#sub-item.item(ui-sref='home.game') Game
                 a#sub-item.item(ui-sref='home.release') Release
         
-        a#menu-item.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
-        a#user-name.item.right(ui-popup, ng-if='user.id') Profile
+        a#menu-item.item.right(ui-sref='home.signin', ng-if='!user.id', menu="signin") Sign In
+        a#user-name.item.right(ui-popup, ng-if='user.id', menu="user") Profile
         div.ui.custom.popup.bottom.left.transition.hidden
             div.ui.column.divided.center.aligned.grid
                 div.column

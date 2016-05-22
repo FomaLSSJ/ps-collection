@@ -1,23 +1,25 @@
-h2.ui.blue.horizontal.header.divider Releases
-table.ui.celled.table
+h2.ui.blue.horizontal.header.divider Users
+div.ui.dimmer.inverted(ng-class='(vm.users.length < 1)? "active" : ""')
+    div.ui.text.loader Loading
+table#users.ui.celled.table(ng-show='vm.users.length > 0')
     thead
         tr
-            th Title
-            th Type
-            th Region
-            th Publisher
+            th Username/ID
+            th Role
+            th PSN ID/Profile
+            th Info
     tbody
         tr(ng-repeat='user in vm.users')
-            td
+            td#username
                 a(ui-sref='home.profile({ id:user.id })')
                     span(ng-bind='user.username')
-            td(ng-bind='user.role')
-            td(ng-if='user.psnid')
+            td#role(ng-bind='user.role')
+            td#psnid(ng-if='user.psnid')
                 a(ng-href='//my.playstation.com/{{ ::user.psnid }}', target='_blank')
                     span(ng-bind='user.psnid')
-            td(ng-if='!user.psnid')
-                span None
-            td(ng-if='user.info')
+            td#psnid(ng-if='!user.psnid')
+                span.text.gray No PSNID
+            td#info(ng-if='user.info')
                 span(ng-bind='user.info')
-            td(ng-if='!user.info')
-                span None
+            td#info(ng-if='!user.info')
+                span.text.gray User has no info. Seem to be a shadow assasin.

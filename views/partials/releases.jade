@@ -1,5 +1,7 @@
 h2.ui.blue.horizontal.header.divider Releases
-table.ui.celled.table
+div.ui.dimmer.inverted(ng-class='(vm.releases.length < 1)? "active" : ""')
+    div.ui.text.loader Loading
+table.ui.celled.table(ng-show='vm.releases.length > 0')
     thead
         tr
             th Title
@@ -9,6 +11,6 @@ table.ui.celled.table
     tbody
         tr(ng-repeat='release in vm.releases')
             td(ng-bind='release.title')
-            td(ng-bind='release.type')
-            td(ng-bind='release.region')
+            td(ng-bind='release.type | type')
+            td(ng-bind='release.region | region')
             td(ng-bind='release.publisher')

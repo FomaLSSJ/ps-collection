@@ -20,9 +20,7 @@ router.post('/create', function(req, res, next) {
     
     release.save(function(err, release) {
         if (!err) {
-            releaseModel.find({}).populate('game').exec(function(err, releases) {
-                return res.send({status: true, release: releases});
-            });
+            return res.send({status: true, release: release});
         } else {
             return res.send({status: false, error: err});
         }
