@@ -11,6 +11,8 @@ var passport = require('passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var releases = require('./routes/releases');
+var games = require('./routes/games');
 
 var app = express();
 
@@ -39,6 +41,8 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/releases', releases);
+app.use('/games', games);
 
 var db = require('./lib/mongoose');
 

@@ -64,9 +64,7 @@
                 $scope.profile.self = false;
             }
             
-            console.log('asd');
-            
-            if (!$scope.profile.self && $scope.self.state == 'edit' && ($scope.user != 'admin' || $scope.user != 'moder')) {
+            if (!$scope.profile.self && $scope.self.state == 'edit' && (!$scope.user.role || $scope.user.role == 'user')) {
                 toastr.warning('Hey, you... yes, YOU! Fuck off!', 'Error');
                 $state.go('home');
             }

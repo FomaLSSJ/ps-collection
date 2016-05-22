@@ -47,10 +47,10 @@ router.get('/get/:id', function(req, res, next) {
 
 router.get('/all/:limit', function(req, res, next) {
     userModel.find({}, {password: 0, salt: 0, email: 0}, {limit: req.params.limit}, function(err, users) {
-      if (err) {
-        return res.send({status: false, response: {message: 'User not found', name: 'Model'}});
-      } else if (!err) {
+      if (!err) {
         return res.send({status: true, users: users});
+      } else {
+        return res.send({status: false, response: {message: 'User not found', name: 'Model'}});
       }
     });
 });

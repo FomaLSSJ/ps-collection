@@ -1,13 +1,13 @@
-h2.ui.blue.horizontal.header.divider Users
+h2.ui.blue.horizontal.header.divider Releases
 table.ui.celled.table
     thead
         tr
-            th Name
-            th Role
-            th PSN ID
-            th Info
+            th Title
+            th Type
+            th Region
+            th Publisher
     tbody
-        tr(ng-repeat='user in users')
+        tr(ng-repeat='user in vm.users')
             td
                 a(ui-sref='home.profile({ id:user.id })')
                     span(ng-bind='user.username')

@@ -1,0 +1,25 @@
+h2.ui.blue.horizontal.header.divider Add Game
+
+div.ui.segment
+    form.ui.large.form(ng-submit='vm.gameCreate()')
+        div.ui.fluid.input
+            input(type='text', placeholder='Title', ng-model='vm.game.title')
+        div.ui.divider
+        div.ui.fluid.input
+            input(type='text', placeholder='Developer', ng-model='vm.game.developer')
+        div.ui.divider
+        //div.ui.fluid.input
+            input(type='text', placeholder='Genre', ng-model-'vm.game.genre')
+        select.ui.fluid.normal.dropdown(name='genre', multiple='', ui-dropdown, ng-model='vm.game.genre')
+            option(value='') Genres
+            option(value='action') Action
+            option(value='fps') FPS
+            option(value='rpg') RPG
+            option(value='jrpg') jRPG
+            option(value='tactic') Tactic
+            option(value='horror') Horror
+            option(value='platformer') Platformer
+            option(value='metroidvania') Metroidvania
+        div.ui.divider
+        input.ui.button(type='submit', value='Save game')
+    

@@ -1,23 +1,30 @@
 div.ui.fixed.menu.borderless
-    div.ui.container
-        a.header.item(href='#') 
+    div#header.ui.container
+        a.header.item(href='#')
             //- img.logo(src="assets/images/psc-logo.jpg")
             | PS-Collection
-        a.item(ui-sref='home') Home
-        div.ui.simple.dropdown.item Comunity
+        a#menu-item.item(ui-sref='home') Home
+        div#menu-item.ui.simple.dropdown.item Comunity
             i.dropdown.icon
             div.menu
                 div.header Profiles
-                a.item(ui-sref='home.profile({ id:user.id })', ng-if="user.id") My profile
-                a.item(ui-sref='home.users') Other users
-        div.ui.simple.dropdown.item Games
+                a#sub-item.item(ui-sref='home.profile({ id:user.id })', ng-if="user.id") My profile
+                a#sub-item.item(ui-sref='home.users') Other users
+        div#menu-item.ui.simple.dropdown.item Games
             i.dropdown.icon
             div.menu
                 div.header Consoles
-                a.item(href='#') PS3
-                a.item(href='#') PS4
-        a.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
-        a.item.right(ui-popup, ng-if='user.id') Profile
+                a#sub-item.item(ui-sref='home.releases({ platform: "ps3" })') PS3
+                a#sub-item.item(ui-sref='home.releases({ platform: "ps4" })') PS4
+        diva#menu-item.ui.simple.dropdown.item Add
+            i.dropdown.icon
+            div.menu
+                div.header Category
+                a#sub-item.item(ui-sref='home.game') Game
+                a#sub-item.item(ui-sref='home.release') Release
+        
+        a#menu-item.item.right(ui-sref='home.signin', ng-if='!user.id') Sign In
+        a#user-name.item.right(ui-popup, ng-if='user.id') Profile
         div.ui.custom.popup.bottom.left.transition.hidden
             div.ui.column.divided.center.aligned.grid
                 div.column

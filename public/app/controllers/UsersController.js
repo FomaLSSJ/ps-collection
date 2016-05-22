@@ -3,16 +3,18 @@
     
     angular.module('app').controller('UsersCtrl', UsersCtrl);
     
-    UsersCtrl.$inject = ['$scope', '$http'];
+    UsersCtrl.$inject = ['$http'];
     
-    function UsersCtrl($scope, $http) {
-        $scope.users = [];
+    function UsersCtrl($http) {
+        var vm = this;
+        
+        vm.users = [];
         
         $http({
             method: 'GET',
             url: '/users/all/10'
         }).then(function(res) {
-            $scope.users = res.data.users;
+            vm.users = res.data.users;
         });
     }
 })();

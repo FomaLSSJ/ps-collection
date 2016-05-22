@@ -1,0 +1,41 @@
+h2.ui.blue.horizontal.header.divider Add Release
+
+div.ui.segment
+    form.ui.large.form(ng-submit='vm.releaseCreate()')
+        div.ui.fluid.search.selection.dropdown(ui-dropdown-api)
+            input(type='hidden', name='game', ng-update-hidden, ng-model='vm.release.game')
+            i.dropdown.icon
+            div.default.text Game
+            div.menu
+        div.ui.divider
+        div.ui.fluid.input
+            input(type='text', placeholder='Title', ng-model='vm.release.title')
+        div.ui.divider
+        select.ui.fluid.normal.dropdown(name='type', ui-dropdown, ng-model='vm.release.type')
+            option(value='') Type
+            option(value='physical') Physical
+            option(value='digital') Digital
+        div.ui.divider
+        div.ui.fluid.input
+            input(type='text', placeholder='Publisher', ng-model='vm.release.publisher')
+        div.ui.divider
+        select.ui.fluid.normal.dropdown(name='region', ui-dropdown, ng-model='vm.release.region')
+            option(value='') Region
+            option(value='eu') Europe
+            option(value='us') USA
+            option(value='jp') Japan
+            option(value='as') Australia
+        div.ui.divider
+        select.ui.fluid.normal.dropdown(name='platform', ui-dropdown, ng-model='vm.release.platform')
+            option(value='') Platform
+            option(value='ps3') PlayStation 3
+            option(value='ps4') PlayStation 4
+        div.ui.divider
+        div.ui.fluid.input
+            input(type='text', placeholder='Date: YYYY/MM/DD', ng-model='vm.release.date')
+        div.ui.divider
+        div.ui.fluid.input
+            input(type='text', placeholder='Code', ng-model='vm.release.code')
+        div.ui.divider
+        input.ui.button(type='submit', value='Save release')
+    

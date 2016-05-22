@@ -1,0 +1,14 @@
+h2.ui.blue.horizontal.header.divider Releases
+table.ui.celled.table
+    thead
+        tr
+            th Title
+            th Type
+            th Region
+            th Publisher
+    tbody
+        tr(ng-repeat='release in vm.releases')
+            td(ng-bind='release.title')
+            td(ng-bind='release.type')
+            td(ng-bind='release.region')
+            td(ng-bind='release.publisher')
