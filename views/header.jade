@@ -3,32 +3,42 @@ div.ui.fixed.menu.borderless
         a.header.item(href='#')
             //- img.logo(src="assets/images/psc-logo.jpg")
             | PS-Collection
-        a#menu-item.item(ui-sref='home', menu="home") Home
-        div#menu-item.ui.simple.dropdown.item(menu="community") Community
+        a#menu-item.item(ui-sref='home', menu='home') Home
+        div#menu-item.ui.simple.dropdown.item(menu='community') Community
             i.dropdown.icon
             div.menu
                 div.header Profiles
-                a#sub-item.item(ui-sref='home.profile({ id:user.id })', ng-if="user.id") My profile
-                a#sub-item.item(ui-sref='home.users') Other users
-        div#menu-item.ui.simple.dropdown.item(menu="games") Games
+                a#sub-item.item(ui-sref='home.profiles.profile({ id:user.id })', ng-if="user.id") My profile
+                a#sub-item.item(ui-sref='home.profiles') Other users
+        div#menu-item.ui.simple.dropdown.item(menu='platform') Platform
             i.dropdown.icon
             div.menu
                 div.header Consoles
-                a#sub-item.item(ui-sref='home.releases({ platform: "ps3" })') PS3
-                a#sub-item.item(ui-sref='home.releases({ platform: "ps4" })') PS4
-        div#menu-item.ui.simple.dropdown.item(menu="add", ng-if='user.role == "admin" || user.role == "moder"') Add
+                div#sub-item.dropdown.item(menu='ps3')
+                    i.dropdown.icon
+                    span.text PlayStation 3
+                    div.menu
+                        a#sub-item-lv2.item(ui-sref='home') Games
+                        a#sub-item-lv2.item(ui-sref='home.releases.platform({ platform: "ps3" })') Releases
+                div#sub-item.dropdown.item(menu='ps4')
+                    i.dropdown.icon
+                    span.text PlayStation 4
+                    div.menu
+                        a#sub-item-lv2.item(ui-sref='home') Games
+                        a#sub-item-lv2.item(ui-sref='home.releases.platform({ platform: "ps4" })') Releases
+        div#menu-item.ui.simple.dropdown.item(menu='add', ng-if='user.role == "admin" || user.role == "moder"') Add
             i.dropdown.icon
             div.menu
                 div.header Category
                 a#sub-item.item(ui-sref='home.game') Game
-                a#sub-item.item(ui-sref='home.release') Release
+                a#sub-item.item(ui-sref='home.releases.release') Release
         
-        a#menu-item.item.right(ui-sref='home.signin', ng-if='!user.id', menu="signin") Sign In
-        a#user-name.item.right(ui-popup, ng-if='user.id', menu="user") Profile
+        a#menu-item.item.right(ui-sref='home.signin', ng-if='!user.id', menu='signin') Sign In
+        a#user-name.item.right(ui-popup, ng-if='user.id', menu='user') Profile
         div.ui.custom.popup.bottom.left.transition.hidden
             div.ui.column.divided.center.aligned.grid
                 div.column
                     h4 Profile
                     p Place your info
                     div
-                        a(ui-sref='home.profile({ id:user.id })') Open profile
+                        a(ui-sref='home.profiles.profile({ id:user.id })') Open profile

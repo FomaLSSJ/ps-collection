@@ -1,4 +1,4 @@
-h2.ui.blue.horizontal.header.divider Releases
+h2.ui.blue.horizontal.header.divider Releases {{ ::root.platform | platform }}
 div.ui.dimmer.inverted(ng-class='(vm.releases.length < 1)? "active" : ""')
     div.ui.text.loader Loading
 table.ui.celled.table(ng-show='vm.releases.length > 0')
@@ -8,9 +8,11 @@ table.ui.celled.table(ng-show='vm.releases.length > 0')
             th Type
             th Region
             th Publisher
+            th(ng-if='root.releasesAll') Platform
     tbody
         tr(ng-repeat='release in vm.releases')
-            td(ng-bind='release.title')
-            td(ng-bind='release.type | type')
-            td(ng-bind='release.region | region')
-            td(ng-bind='release.publisher')
+            td#title(ng-bind='release.title')
+            td#type(ng-bind='release.type | type')
+            td#region(ng-bind='release.region | region')
+            td#publisher(ng-bind='release.publisher')
+            td#platform(ng-if='root.releasesAll', ng-bind='release.platform | platform')

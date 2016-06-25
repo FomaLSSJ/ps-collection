@@ -11,7 +11,7 @@ table#users.ui.celled.table(ng-show='vm.users.length > 0')
     tbody
         tr(ng-repeat='user in vm.users')
             td#username
-                a(ui-sref='home.profile({ id:user.id })')
+                a(ui-sref='home.profiles.profile({ id:user.id })')
                     span(ng-bind='user.username')
             td#role(ng-bind='user.role')
             td#psnid(ng-if='user.psnid')
@@ -22,4 +22,4 @@ table#users.ui.celled.table(ng-show='vm.users.length > 0')
             td#info(ng-if='user.info')
                 span(ng-bind='user.info')
             td#info(ng-if='!user.info')
-                span.text.gray User has no info. Seem to be a shadow assasin.
+                span.text.gray User has no info. Seem to be a shadow assassin.

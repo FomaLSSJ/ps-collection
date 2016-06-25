@@ -6,6 +6,8 @@
     AppCtrl.$inject = ['$scope', '$http', '$cookies'];
     
     function AppCtrl($scope, $http, $cookies) {
+        var root = this;
+        
         $scope.user = {};
         $scope.profile = {};
         activate();
@@ -18,5 +20,5 @@
         if (userData) {
             $scope.user = userData;
         }
-    };
+    }
 })();

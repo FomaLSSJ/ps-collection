@@ -23,9 +23,7 @@
                     }
                 },
                 data: {
-                    breadcrumb: [
-                        {name: 'Home', divider: false, url: false}
-                    ]
+                    displayName: 'Home'
                 }
             })
             .state('home.signin', {
@@ -39,10 +37,7 @@
                 },
                 data: {
                     state:'in',
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Sign In', divider: false, url: false}
-                    ]
+                    displayName: 'Sign In'
                 },
                 resolve: {
                     profile: ['AuthService', function(AuthService) {
@@ -61,10 +56,7 @@
                 },
                 data: {
                     state:'up',
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Sign Up', divider: false, url: false}
-                    ]
+                    displayName: 'Sign Up'
                 },
                 resolve: {
                     profile: ['AuthService', function(AuthService) {
@@ -72,8 +64,22 @@
                     }]
                 }
             })
-            .state('home.profile', {
+            .state('home.profiles', {
                 id: 4,
+                url:'^/profiles',
+                views: {
+                    'main@': {
+                        templateUrl:'/partials/profiles',
+                        controller:'UsersCtrl',
+                        controllerAs:'vm'
+                    }
+                },
+                data: {
+                    displayName: 'Profiles'
+                }
+            })
+            .state('home.profiles.profile', {
+                id: 5,
                 url:'^/profile/:id',
                 views: {
                     'main@': {
@@ -83,20 +89,19 @@
                 },
                 data: {
                     state:'show',
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Users', divider: true, url: 'home.users'},
-                        {name: '{{ profile.username }}', divider: false, url: false, user: true}
-                    ]
+                    displayName: '{{ profileName }}'
                 },
                 resolve: {
+                    profileName: ['HelperService', '$stateParams', function(HelperService, $stateParams) {
+                        return HelperService.getUserName($stateParams.id)
+                    }],
                     profile: ['AuthService', '$stateParams', function(AuthService, $stateParams) {
                         return AuthService.getAuth($stateParams.id);
                     }]
                 }
             })
-            .state('home.profile.edit', {
-                id: 5,
+            .state('home.profiles.profile.edit', {
+                id: 6,
                 url:'^/profile/:id/edit',
                 views: {
                     'main@': {
@@ -106,34 +111,12 @@
                 },
                 data: {
                     state:'edit',
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Users', divider: true, url: 'home.users'},
-                        {name: '{{ profile.username }}', divider: true, url: 'home.profile({ id:profile.id })', user: true},
-                        {name: 'Edit', divider: false, url: false}
-                    ]
+                    displayName: 'Edit'
                 },
                 resolve: {
                     profile: ['AuthService', '$stateParams', function(AuthService, $stateParams) {
                         return AuthService.getAuth($stateParams.id);
                     }]
-                }
-            })
-            .state('home.users', {
-                id: 6,
-                url:'^/users',
-                views: {
-                    'main@': {
-                        templateUrl:'/partials/users',
-                        controller:'UsersCtrl',
-                        controllerAs:'vm'
-                    }
-                },
-                data: {
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Users', divider: false, url: false}
-                    ]
                 }
             })
             .state('home.game', {
@@ -147,15 +130,45 @@
                     }
                 },
                 data: {
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Game', divider: true, url: false},
-                        {name: 'Add', divider: false, url: false}
-                    ]
+                    displayName:'Game'
                 }
             })
-            .state('home.release', {
+            .state('home.releases', {
                 id: 8,
+                url:'^/releases',
+                views: {
+                    'main@': {
+                        templateUrl:'/partials/releases',
+                        controller:'ReleasesCtrl',
+                        controllerAs:'vm'
+                    }
+                },
+                data: {
+                    releasesAll: true,
+                    displayName: 'Releases'
+                }
+            })
+            .state('home.releases.platform', {
+                id: 9,
+                url:'^/platform/:platform',
+                views: {
+                    'main@': {
+                        templateUrl:'/partials/releases',
+                        controller:'PlatformCtrl',
+                        controllerAs:'vm'
+                    }
+                },
+                data: {
+                    displayName: '{{ platformName }}'
+                },
+                resolve: {
+                    platformName: ['HelperService', '$stateParams', function(HelperService, $stateParams) {
+                        return HelperService.getPlatformName($stateParams.platform)
+                    }]
+                }
+            })
+            .state('home.releases.release', {
+                id: 10,
                 url:'^/release',
                 views: {
                     'main@': {
@@ -165,28 +178,7 @@
                     }
                 },
                 data: {
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Release', divider: true, url: false},
-                        {name: 'Add', divider: false, url: false}
-                    ]
-                }
-            })
-            .state('home.releases', {
-                id: 9,
-                url:'^/releases/:platform',
-                views: {
-                    'main@': {
-                        templateUrl:'/partials/releases',
-                        controller:'ReleasesCtrl',
-                        controllerAs:'vm'
-                    }
-                },
-                data: {
-                    breadcrumb: [
-                        {name: 'Home', divider: true, url: 'home'},
-                        {name: 'Releases', divider: false, url: false},
-                    ]
+                    displayName: 'Release'
                 }
             });
         

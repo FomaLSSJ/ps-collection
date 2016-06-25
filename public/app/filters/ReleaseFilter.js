@@ -2,9 +2,11 @@
     'use strict';
     angular.module('app').filter('type', type);
     angular.module('app').filter('region', region);
+    angular.module('app').filter('platform', platform);
     
     type.$inject = [];
     region.$inject = [];
+    platform.$inject = [];
     
     function type() {
         return function(input) {
@@ -30,5 +32,17 @@
                     return 'Australia';
             }
         };
+    }
+    
+    function platform() {
+        return function(input) {
+            var ps = 'PlayStation';
+            switch (input) {
+                case 'ps3':
+                    return ps + ' 3';
+                case 'ps4':
+                    return ps + ' 4';
+            }
+        }
     }
 })();

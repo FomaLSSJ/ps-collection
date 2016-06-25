@@ -27,14 +27,24 @@ router.post('/create', function(req, res, next) {
     });
 });
 
-router.get('/all/:platform/:limit', function(req, res, next) {
-    releaseModel.find({platform: req.params.platform}, null, {limit: req.params.limit}).populate('game').exec(function(err, releases) {
-        if (!err) {
-            return res.send({status: true, releases: releases});
-        } else {
-            return res.send({status: false, response: {message: 'Model get error', name: 'Model'}});
-        }
-    });
+router.get('/:platform/:limit', function(req, res, next) {
+    if (req.params.platform === 'all') {
+        releaseModel.find({}, null, {limit: req.params.limit}).populate('game').exec(function(err, releases) {
+            if (!err) {
+                return res.send({status: true, releases: releases});
+            } else {
+                return res.send({status: false, response: {message: 'Model get error', name: 'Model'}});
+            }
+        });
+    } else {
+        releaseModel.find({platform: req.params.platform}, null, {limit: req.params.limit}).populate('game').exec(function(err, releases) {
+            if (!err) {
+                return res.send({status: true, releases: releases});
+            } else {
+                return res.send({status: false, response: {message: 'Model get error', name: 'Model'}});
+            }
+        });
+    }
 });
 
 module.exports = router;
