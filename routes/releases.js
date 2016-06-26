@@ -27,9 +27,9 @@ router.post('/create', function(req, res, next) {
     });
 });
 
-router.get('/:platform/:limit', function(req, res, next) {
+router.get('/:platform/:page', function(req, res, next) {
     if (req.params.platform === 'all') {
-        releaseModel.find({}, null, {limit: req.params.limit}).populate('game').exec(function(err, releases) {
+        releaseModel.paginate({}, {page: req.params.page, limit: 1, populate: 'game', sort: {title: 1}}, function(err, releases) {
             if (!err) {
                 return res.send({status: true, releases: releases});
             } else {
@@ -37,7 +37,7 @@ router.get('/:platform/:limit', function(req, res, next) {
             }
         });
     } else {
-        releaseModel.find({platform: req.params.platform}, null, {limit: req.params.limit}).populate('game').exec(function(err, releases) {
+        releaseModel.paginate({platform: req.params.platform}, {page: req.params.page, limit: 1, populate: 'game', sort: {title: 1}}, function(err, releases) {
             if (!err) {
                 return res.send({status: true, releases: releases});
             } else {

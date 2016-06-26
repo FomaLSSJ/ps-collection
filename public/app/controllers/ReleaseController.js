@@ -5,7 +5,7 @@
     angular.module('app').controller('PlatformCtrl', PlatformCtrl);
     
     ReleaseCtrl.$inject = ['$http'];
-    ReleasesCtrl.$inject = ['$scope', '$state', '$http'];
+    ReleasesCtrl.$inject = ['$scope', '$state', '$stateParams', '$http'];
     PlatformCtrl.$inject = ['$scope', '$stateParams', '$http'];
     
     function ReleaseCtrl($http) {
@@ -25,15 +25,16 @@
         }
     }
     
-    function ReleasesCtrl($scope, $state, $http) {
+    function ReleasesCtrl($scope, $state, $stateParams, $http) {
         var vm = this;
         
         $scope.root.releasesAll = $state.current.data.releasesAll;
-        vm.releases = [];
+        $scope.root.platform = false;
+        vm.releases = {};
         
         $http({
             method: 'GET',
-            url: '/releases/all/10'
+            url: '/releases/all/' + $stateParams.page
         }).then(function(res) {
             vm.releases = res.data.releases;
         });
@@ -44,11 +45,11 @@
         
         $scope.root.releasesAll = false;
         $scope.root.platform = $stateParams.platform;
-        vm.releases = [];
+        vm.releases = {};
         
         $http({
             method: 'GET',
-            url: '/releases/' + $stateParams.platform + '/10'
+            url: '/releases/' + $stateParams.platform + '/' + $stateParams.page
         }).then(function(res) {
             vm.releases = res.data.releases;
         });

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    mongoosePaginate = require('mongoose-paginate');
     
 var release = Schema({
     title: {
@@ -45,6 +46,8 @@ release.set('toJSON', {
         delete ret.__v;
     }
 });
+
+release.plugin(mongoosePaginate);
 
 var game = require('./game').gameModel;
 

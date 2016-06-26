@@ -135,13 +135,16 @@
             })
             .state('home.releases', {
                 id: 8,
-                url:'^/releases',
+                url:'^/releases/:page',
                 views: {
                     'main@': {
                         templateUrl:'/partials/releases',
                         controller:'ReleasesCtrl',
                         controllerAs:'vm'
                     }
+                },
+                params: {
+                    page: '1'
                 },
                 data: {
                     releasesAll: true,
@@ -150,13 +153,17 @@
             })
             .state('home.releases.platform', {
                 id: 9,
-                url:'^/platform/:platform',
+                url:'^/platform/:platform/:page',
                 views: {
                     'main@': {
                         templateUrl:'/partials/releases',
                         controller:'PlatformCtrl',
                         controllerAs:'vm'
                     }
+                },
+                params: {
+                    platform: 'all',
+                    page: '1'
                 },
                 data: {
                     displayName: '{{ platformName }}'

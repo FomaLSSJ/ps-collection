@@ -1,0 +1,7 @@
+div.ui.right.floated.pagination.menu
+    a.icon.item(ng-click="goBack(prevPage)", ng-class="{ disabled : paginateData.page == 1 }", name="prev")
+        i.left.chevron.icon
+    a.item(ng-bind="paginateData.page")
+    a.icon.item(ng-click="goNext(nextPage)", ng-class="{ disabled : paginateData.page ==  paginateData.total}", name="next")
+        i.right.chevron.icon
+    
